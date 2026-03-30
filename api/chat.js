@@ -644,9 +644,10 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       const errorData = await response.text();
-      console.error('Groq API error:', errorData);
-      return res.status(response.status).json({
-        error: 'AI service temporarily unavailable. Please try again.'
+      console.error('Groq API error:', response.status, errorData);
+      return res.status(502).json({
+        error: 'AI service temporarily unavailable. Please try again.',
+        debug: process.env.NODE_ENV !== 'production' ? errorData : undefined
       });
     }
 
