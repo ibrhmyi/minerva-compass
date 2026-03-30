@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Minerva Compass — Admin Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Auth screen -->
+  <div class="auth-screen" id="auth-screen">
+    <div class="auth-card glass">
+      <div class="auth-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" opacity="0.4"/>
+        </svg>
+      </div>
+      <h1>Minerva Compass <span class="text-gradient">Admin</span></h1>
+      <p>Enter your password to access the dashboard.</p>
+      <div class="auth-input-group">
+        <input type="password" id="token-input" placeholder="Password" autocomplete="off">
+        <button id="auth-btn" type="button">Enter</button>
+      </div>
+      <div class="auth-error" id="auth-error"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard" style="display:none;">
+    <header class="dash-header glass">
+      <div class="dash-header-left">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" opacity="0.6"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Compass Admin</h1>
+          <span class="dash-subtitle">Analytics & Management</span>
+        </div>
+      </div>
+      <div class="dash-header-right">
+        <a href="/" class="dash-link">Back to Chat</a>
+        <button id="refresh-btn" class="icon-btn" title="Refresh data">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="dash-tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="sessions">Sessions</button>
+      <button class="tab-btn" data-tab="feedback">Feedback</button>
+      <button class="tab-btn" data-tab="emails">Emails</button>
+    </nav>
+
+    <!-- Overview Tab -->
+    <section class="tab-content active" id="tab-overview">
+      <!-- Row 1: 5 key metrics -->
+      <div class="stats-grid-5">
+        <div class="stat-card glass">
+          <div class="stat-label">Total Questions</div>
+          <div class="stat-value" id="stat-total">--</div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Today</div>
+          <div class="stat-value" id="stat-today">--</div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Sessions</div>
+          <div class="stat-value" id="stat-sessions">--</div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Positive</div>
+          <div class="stat-value positive" id="stat-positive">--</div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Negative</div>
+          <div class="stat-value negative" id="stat-negative">--</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Journey (3 cols) + Emails + Flags — same 5-col grid -->
+      <div class="stats-grid-5">
+        <div class="stat-card-wide glass" style="grid-column: span 3;">
+          <div class="stat-label">User Journey</div>
+          <div class="stage-chart-inline" id="stage-chart"></div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Emails Captured</div>
+          <div class="stat-value gold" id="stat-emails">--</div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-label">Flagged</div>
+          <div class="stat-value negative" id="stat-flagged">--</div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-row">
+        <div class="chart-card glass">
+          <h3>Questions (Last 14 Days)</h3>
+          <div class="bar-chart" id="daily-chart"></div>
+        </div>
+        <div class="chart-card glass">
+          <h3>Popular Topics</h3>
+          <div class="topic-chart" id="topic-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sessions Tab -->
+    <section class="tab-content" id="tab-sessions">
+      <div class="sessions-header">
+        <div class="sessions-stats">
+          <span id="sessions-total">0 sessions</span>
+          <span class="sessions-divider">&middot;</span>
+          <span id="sessions-flagged" class="flagged-count">0 flagged</span>
+        </div>
+        <div class="sessions-filters">
+          <button class="small-btn session-filter active" data-filter="all">All</button>
+          <button class="small-btn session-filter" data-filter="flagged">Flagged</button>
+        </div>
+      </div>
+      <div class="sessions-list" id="sessions-list">
+        <div class="empty-state">Loading...</div>
+      </div>
+      <!-- Session detail modal -->
+      <div class="session-detail" id="session-detail" style="display:none;">
+        <div class="session-detail-header">
+          <button id="session-back-btn" class="small-btn">Back</button>
+          <span id="session-detail-title" class="session-detail-title"></span>
+        </div>
+        <div class="session-detail-messages" id="session-detail-messages"></div>
+      </div>
+    </section>
+
+    <!-- Feedback Tab -->
+    <section class="tab-content" id="tab-feedback">
+      <div class="feedback-list" id="feedback-list">
+        <div class="empty-state">Loading...</div>
+      </div>
+    </section>
+
+    <!-- Emails Tab -->
+    <section class="tab-content" id="tab-emails">
+      <div class="emails-header">
+        <span id="email-count">0 captured emails</span>
+        <button id="export-emails-btn" class="small-btn">Export CSV</button>
+      </div>
+      <div class="emails-list" id="emails-list">
+        <div class="empty-state">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
