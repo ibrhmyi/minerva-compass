@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minerva Compass — AI-powered admissions assistant for Minerva University applicants. Get instant answers about admissions, financial aid, student life, and more.">
+  <meta name="theme-color" content="#000000">
+  <title>Minerva Compass — Admissions Assistant</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+</head>
+<body>
+  <!-- Animated background orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header glass" role="banner">
+      <div class="header-left">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>Minerva Compass</h1>
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span>AI Assistant Online</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="clear-chat-btn" class="icon-btn" type="button" aria-label="Clear conversation" title="New conversation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+        <span class="ai-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+            <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+            <path d="M16 16c0-2.21-1.79-4-4-4s-4 1.79-4 4"/>
+            <circle cx="12" cy="20" r="2"/>
+          </svg>
+          AI-Powered
+        </span>
+      </div>
+    </header>
+
+    <!-- Chat Area -->
+    <main class="chat-area" id="chat-area" role="log" aria-label="Chat messages" aria-live="polite">
+
+      <!-- Welcome Screen -->
+      <div class="welcome-screen" id="welcome-screen">
+        <div class="welcome-hero">
+          <div class="welcome-icon-ring">
+            <div class="welcome-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" opacity="0.4"/>
+              </svg>
+            </div>
+          </div>
+          <h2>Welcome to <span class="text-gradient">Minerva Compass</span></h2>
+          <p>Your AI-powered guide to Minerva University admissions. Ask anything about applications, financial aid, student life, or what makes Minerva unique.</p>
+        </div>
+        <div class="quick-questions" role="group" aria-label="Suggested questions">
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x1F4CB;</span>
+            <span class="quick-q-text">How does the application work?</span>
+          </button>
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x23F0;</span>
+            <span class="quick-q-text">What are the deadlines?</span>
+          </button>
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x1F4B0;</span>
+            <span class="quick-q-text">How does financial aid work?</span>
+          </button>
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x1F3C6;</span>
+            <span class="quick-q-text">Tips for accomplishments?</span>
+          </button>
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x2728;</span>
+            <span class="quick-q-text">What makes Minerva different?</span>
+          </button>
+          <button class="quick-q glass-subtle" type="button">
+            <span class="quick-q-icon">&#x1F9E9;</span>
+            <span class="quick-q-text">What are the Challenges like?</span>
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Input Area -->
+    <div class="input-area glass">
+      <div class="input-wrapper">
+        <label for="message-input" class="sr-only">Type your question</label>
+        <textarea
+          id="message-input"
+          placeholder="Ask about admissions, financial aid, student life..."
+          rows="1"
+          aria-label="Type your question about Minerva University"
+        ></textarea>
+        <button id="send-btn" class="send-btn" type="button" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5"/>
+            <path d="M5 12l7-7 7 7"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-footer">
+        <span class="input-hint">Enter to send &middot; Shift+Enter for new line</span>
+        <span class="char-count" id="char-count"></span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      Powered by AI &middot; Based on <a href="https://www.minerva.edu" target="_blank" rel="noopener noreferrer">Minerva University</a>'s published info &middot; Always verify with <a href="mailto:admissions@minerva.edu">admissions@minerva.edu</a>
+      <br>
+      <span class="data-freshness">Data last updated: March 31, 2026</span>
+    </footer>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
