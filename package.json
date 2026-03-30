@@ -1,0 +1,12 @@
+{
+  "name": "minerva-compass",
+  "version": "1.0.0",
+  "description": "Minerva Compass — AI-powered admissions assistant for Minerva University",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site — no build step required'",
+    "deploy": "vercel --prod"
+  }
+}
