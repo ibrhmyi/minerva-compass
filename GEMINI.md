@@ -14,15 +14,18 @@ What changes because this app exists: Applicants from any timezone, any country,
 
 ## Tech Stack
 - **Frontend**: Vanilla HTML, CSS, JavaScript (no frameworks, no build tools)
-- **Backend**: Single Vercel serverless function (Node.js) proxying to xAI Grok API
+- **Backend**: Vercel Edge Function streaming proxy to Google Gemini API
+- **AI**: Gemini 2.0 Flash via Google Generative AI API (free tier: 15 RPM, 1M tokens/day)
 - **Hosting**: Vercel
-- **Data**: No database. No user data stored. Conversation stays in browser memory only.
-- **Cost**: $0 (Grok free tier credits)
+- **Data**: No server-side database. Conversation persists in browser localStorage only.
+- **Cost**: $0 (Gemini free tier)
 
 ## AI Integration
-- Grok 3 Mini Fast model via xAI API
-- Comprehensive system prompt with verified Minerva University knowledge base
+- Gemini 2.0 Flash model via Google Generative AI API
+- Streaming responses (Server-Sent Events) for real-time display
+- Comprehensive system prompt with verified Minerva University knowledge base (scraped April 5, 2026)
 - Low temperature (0.3) for factual accuracy
+- Source citations linking back to minerva.edu pages
 - AI-Assisted badge displayed per Minerva guardrails requirements
 - Transparent about being AI — never pretends to be human
 

@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="Minerva Compass — AI-powered admissions assistant for Minerva University applicants. Get instant answers about admissions, financial aid, student life, and more.">
   <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Minerva Compass">
   <title>Minerva Compass — Admissions Assistant</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
 
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +21,8 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/icon-192.png">
 </head>
 <body>
   <!-- Animated background orbs -->
@@ -45,19 +52,11 @@
         </div>
       </div>
       <div class="header-actions">
-        <button id="clear-chat-btn" class="icon-btn" type="button" aria-label="Clear conversation" title="New conversation">
+        <button id="clear-chat-btn" class="icon-btn" type="button" aria-label="New conversation" title="New conversation">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 5v14M5 12h14"/>
           </svg>
         </button>
-        <span class="ai-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
-            <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-            <path d="M16 16c0-2.21-1.79-4-4-4s-4 1.79-4 4"/>
-            <circle cx="12" cy="20" r="2"/>
-          </svg>
-          AI-Powered
-        </span>
       </div>
     </header>
 
@@ -79,30 +78,7 @@
           <p>Your AI-powered guide to Minerva University admissions. Ask anything about applications, financial aid, student life, or what makes Minerva unique.</p>
         </div>
         <div class="quick-questions" role="group" aria-label="Suggested questions">
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x1F4CB;</span>
-            <span class="quick-q-text">How does the application work?</span>
-          </button>
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x23F0;</span>
-            <span class="quick-q-text">What are the deadlines?</span>
-          </button>
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x1F4B0;</span>
-            <span class="quick-q-text">How does financial aid work?</span>
-          </button>
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x1F3C6;</span>
-            <span class="quick-q-text">Tips for accomplishments?</span>
-          </button>
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x2728;</span>
-            <span class="quick-q-text">What makes Minerva different?</span>
-          </button>
-          <button class="quick-q glass-subtle" type="button">
-            <span class="quick-q-icon">&#x1F9E9;</span>
-            <span class="quick-q-text">What are the Challenges like?</span>
-          </button>
+          <!-- Dynamic quick questions populated by JS based on admission cycle -->
         </div>
       </div>
 
@@ -133,9 +109,9 @@
 
     <!-- Footer -->
     <footer class="app-footer">
-      Powered by AI &middot; Based on <a href="https://www.minerva.edu" target="_blank" rel="noopener noreferrer">Minerva University</a>'s published info &middot; Always verify with <a href="mailto:admissions@minerva.edu">admissions@minerva.edu</a>
+      Powered by AI &middot; Based on <a href="https://minerva.edu" target="_blank" rel="noopener noreferrer">minerva.edu</a> published info &middot; Always verify with <a href="mailto:admissions@minerva.edu">admissions@minerva.edu</a>
       <br>
-      <span class="data-freshness">Data last updated: March 31, 2026</span>
+      <span class="data-freshness">Data last updated: April 5, 2026</span>
     </footer>
 
   </div>

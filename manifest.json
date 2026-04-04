@@ -1,0 +1,19 @@
+{
+  "name": "Minerva Compass",
+  "short_name": "Compass",
+  "description": "AI-powered admissions assistant for Minerva University applicants",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F0B91E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education"]
+}

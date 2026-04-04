@@ -504,16 +504,19 @@ body {
   border-bottom-left-radius: 6px;
 }
 
-/* --- Message Actions (copy, etc.) --- */
+/* --- Message Actions (copy, feedback, etc.) --- */
 .message-actions {
   display: flex;
+  align-items: center;
   gap: 4px;
   margin-top: 8px;
   opacity: 0;
   transition: opacity var(--transition-fast);
+  flex-wrap: wrap;
 }
 
-.message:hover .message-actions {
+.message:hover .message-actions,
+.message-actions:focus-within {
   opacity: 1;
 }
 
@@ -906,4 +909,397 @@ body {
 ::selection {
   background: rgba(240, 185, 30, 0.3);
   color: var(--text-primary);
+}
+
+/* ============================================
+   NEW: Streaming, Feedback, Citations, Toast
+   ============================================ */
+
+/* --- Streaming cursor --- */
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--accent-gold);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursorBlink 0.8s ease infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.message.streaming .message-content {
+  min-height: 1.5em;
+}
+
+/* --- Feedback buttons --- */
+.feedback-group {
+  display: flex;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.feedback-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+}
+
+.feedback-btn:hover {
+  color: var(--text-secondary);
+  background: var(--glass-hover);
+}
+
+.feedback-btn.active.positive {
+  color: var(--success);
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.feedback-btn.active.negative {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* --- Source citations --- */
+.source-citation {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--accent-gold-soft);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.source-citation a {
+  color: var(--accent-gold) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.source-citation a:hover {
+  color: var(--minerva-orange) !important;
+}
+
+/* --- Toast notification --- */
+.toast-notification {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-elevated);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  z-index: 1000;
+  animation: toastIn 0.4s var(--transition-spring, ease);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* toastIn keyframes defined above with error-toast */
+
+/* --- Headers in AI responses --- */
+.message-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 16px 0 8px 0;
+}
+
+.message-content h3:first-child {
+  margin-top: 0;
+}
+
+.message-content h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 12px 0 6px 0;
+}
+
+/* --- Export button styling --- */
+#export-btn {
+  opacity: 0.7;
+}
+
+#export-btn:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   MOBILE POLISH
+   ============================================ */
+
+@media (max-width: 600px) {
+  .app-header {
+    padding: 12px 14px;
+  }
+
+  .header-text h1 {
+    font-size: 1rem;
+  }
+
+  .status-indicator {
+    font-size: 0.65rem;
+  }
+
+  .ai-badge {
+    display: none;
+  }
+
+  .welcome-hero h2 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-hero p {
+    font-size: 0.85rem;
+    padding: 0 8px;
+  }
+
+  .quick-questions {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+    padding: 0 4px;
+  }
+
+  .quick-q {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+
+  .message {
+    padding: 12px 10px;
+    gap: 10px;
+  }
+
+  .message-content {
+    font-size: 0.9rem;
+  }
+
+  .message-avatar {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    font-size: 0.6rem;
+  }
+
+  .follow-ups {
+    gap: 6px;
+  }
+
+  .follow-up-btn {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  .input-area {
+    padding: 10px;
+  }
+
+  .input-wrapper textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 10px 12px;
+  }
+
+  .send-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .input-footer {
+    padding: 0 4px;
+  }
+
+  .input-hint {
+    font-size: 0.68rem;
+  }
+
+  .app-footer {
+    font-size: 0.68rem;
+    padding: 8px 12px;
+  }
+
+  .source-citation {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  .toast-notification {
+    bottom: 80px;
+    font-size: 0.78rem;
+    padding: 8px 16px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .feedback-btn {
+    padding: 6px 8px;
+  }
+
+  .msg-action-btn {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+  .welcome-hero h2 {
+    font-size: 1.1rem;
+  }
+
+  .message-content {
+    font-size: 0.85rem;
+  }
+
+  #export-btn {
+    display: none;
+  }
+}
+
+/* ============================================
+   Chat History Panel
+   ============================================ */
+
+/* History dropdown (inline under header) */
+.history-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border-bottom: 1px solid transparent;
+  transition: max-height 0.3s ease, border-color 0.3s ease;
+}
+
+.history-dropdown.open {
+  max-height: 280px;
+  border-bottom-color: var(--glass-border);
+}
+
+.history-list {
+  overflow-y: auto;
+  max-height: 280px;
+  padding: 8px 16px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.history-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+}
+
+.history-empty {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  padding: 40px 20px;
+  grid-column: 1 / -1;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.history-item:hover {
+  background: var(--glass-hover);
+  border-color: var(--glass-border);
+}
+
+.history-item.active {
+  background: var(--accent-gold-soft);
+  border: 1px solid rgba(240, 185, 30, 0.12);
+}
+
+.history-item-info {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
+.history-item-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.history-item-date {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.history-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.history-item:hover .history-delete-btn {
+  opacity: 1;
+}
+
+.history-delete-btn:hover {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+@media (max-width: 600px) {
+  .history-list {
+    grid-template-columns: 1fr;
+  }
+
+  .history-dropdown.open {
+    max-height: 220px;
+  }
+
+  .history-list {
+    padding: 4px 6px 12px;
+  }
 }

@@ -8,12 +8,25 @@ Minerva Compass helps prospective students get instant, accurate answers about a
 
 Minerva Compass uses an AI model pre-loaded with Minerva University's complete public knowledge base, scraped and compiled from minerva.edu. It answers only from verified, published information. If it doesn't know something, it directs you to admissions@minerva.edu.
 
+## Features
+
+- **Streaming responses** — answers appear in real-time, word by word
+- **Conversation memory** — chat persists across page refreshes via localStorage
+- **Time-aware suggestions** — quick questions change based on the admissions cycle
+- **Source citations** — each answer links back to the relevant minerva.edu page
+- **Response feedback** — thumbs up/down to rate answer quality
+- **Export conversations** — download your chat as a text file
+- **PWA support** — installable on mobile, works with cached shell offline
+- **Auto-retry** — automatic retry on failures with helpful fallback links
+- **Mobile-first** — optimized for phones
+- **Zero data collection** — no database, no cookies, no tracking
+
 ## Tech Stack
 
 - **Frontend**: Vanilla HTML, CSS, JavaScript
-- **Backend**: Vercel serverless function (API proxy)
-- **AI**: Llama 3.3 70B via Groq
-- **Knowledge Base**: Compiled from minerva.edu using Jina Reader (last updated March 31, 2026)
+- **Backend**: Vercel Edge Function (streaming API proxy)
+- **AI**: Gemini 2.0 Flash via Google Generative AI API
+- **Knowledge Base**: Compiled from minerva.edu (last updated April 5, 2026)
 - **Hosting**: Vercel
 
 ## Setup
@@ -27,10 +40,10 @@ cd minerva-compass
 ### 2. Set up environment variables
 Create a `.env` file (or set in Vercel dashboard):
 ```
-GROQ_API_KEY=your_groq_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
-Get a free API key at [console.groq.com](https://console.groq.com).
+Get a free API key at [aistudio.google.com](https://aistudio.google.com/).
 
 ### 3. Run locally
 ```bash
@@ -47,14 +60,16 @@ npx vercel --prod
 ```
 minerva-compass/
 ├── index.html          # Main chat interface
-├── css/styles.css      # Minerva-branded styling
-├── js/app.js           # Chat logic and UI
-├── api/chat.js         # Vercel serverless function (Groq API proxy)
+├── css/styles.css      # Minerva-branded glass UI styling
+├── js/app.js           # Chat logic, streaming, persistence, export
+├── api/chat.js         # Vercel Edge Function (Gemini streaming proxy)
+├── manifest.json       # PWA manifest
+├── sw.js               # Service worker for offline caching
+├── icon.svg            # App icon (compass)
 ├── KNOWLEDGE_BASE.md   # Compiled Minerva knowledge base (source of truth)
 ├── vercel.json         # Vercel configuration
 ├── package.json        # Project metadata
 ├── GEMINI.md           # Project identity & context
-├── SCRATCHPAD.md       # Development session state
 ├── DECISIONS.md        # Architectural decision log
 └── README.md           # This file
 ```
@@ -63,7 +78,7 @@ minerva-compass/
 
 This project follows Minerva University's AI Guardrails:
 - **AI-Assisted badge** displayed in the interface
-- **Zero PII collection** — no data stored anywhere
+- **Zero PII collection** — no data stored on any server
 - **Transparent** — clearly identified as an AI assistant
 - **Human-centered** — supports thinking, never decides for users
 - **Grounded** — only answers from verified published information
